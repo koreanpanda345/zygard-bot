@@ -1,0 +1,17 @@
+# Environment
+.env
+.env.*
+
+# Logs
+logs/
+
+# Deno cache
+.deno/
+
+# IDE
+.idea/
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
