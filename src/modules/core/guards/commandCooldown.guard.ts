@@ -1,4 +1,4 @@
-import { Collection, CommandInteraction, MessageFlags } from "discord.js";
+import { ChatInputCommandInteraction, Collection, MessageFlags } from "discord.js";
 import BaseGuard from "../../../base/BaseGuard.ts";
 import BaseCommand from "../../../base/BaseCommand.ts";
 import ClientCache from "../../../core/ClientCache.ts";
@@ -9,7 +9,7 @@ export default class CommandCooldownGuard extends BaseGuard {
   }
 
   override async canExecute(
-    interaction: CommandInteraction,
+    interaction: ChatInputCommandInteraction,
     command: BaseCommand,
   ): Promise<boolean> {
     if (!ClientCache.cooldowns.has(command.data.name)) {

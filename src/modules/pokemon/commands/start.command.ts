@@ -1,4 +1,4 @@
-import { ActionRowBuilder, ButtonBuilder, ButtonStyle, CommandInteraction, ComponentType, EmbedBuilder, MessageFlags, StringSelectMenuBuilder, StringSelectMenuOptionBuilder, TextChannel } from "discord.js";
+import { ActionRowBuilder, ButtonBuilder, ButtonStyle, ChatInputCommandInteraction, ComponentType, EmbedBuilder, MessageFlags, StringSelectMenuBuilder, StringSelectMenuOptionBuilder, TextChannel } from "discord.js";
 import BaseCommand from "../../../base/BaseCommand.ts";
 import ClientCache from "../../../core/ClientCache.ts";
 import logger from "../../../utils/logger.ts";
@@ -22,7 +22,7 @@ export default class StartCommand extends BaseCommand {
     };
   }
 
-  override async invoke(interaction: CommandInteraction) {
+  override async invoke(interaction: ChatInputCommandInteraction) {
     const starterPokemon = [
       ["Gen 1", "bulbasaur", "charmander", "squirtle"],
       ["Gen 2", "chikorita", "cyndaquil", "totodile"],
@@ -67,8 +67,7 @@ export default class StartCommand extends BaseCommand {
             `It seems like you don't have a pokemon yet. Lets fix that!\n` +
             `Below is a list of pokemon that you can pick from!\n`,
         );
-        gen.shift();
-        for (const pokemon of gen) {
+        for (const pokemon of gen.slice(1)) {
           const data = Dex.species.get(pokemon);
           select.addOptions(
             new StringSelectMenuOptionBuilder()
@@ -163,6 +162,13 @@ export default class StartCommand extends BaseCommand {
         });
       });
       selectCollector.on("collect", async (i) => {
+        if (i.user.id !== interaction.user.id) {
+          return await i.reply({
+            content: "You are not allowed to do this!",
+            flags: MessageFlags.Ephemeral,
+          });
+        }
+
         const species = Dex.species.get(i.values[0]);
         const moves = await discordClient.handlers.get(HandleRandomMoves.name)?.handle(species.id, 4) as string[];
         const nature = discordClient.handlers.get(HandleRandomNature.name)?.handle() as Nature;

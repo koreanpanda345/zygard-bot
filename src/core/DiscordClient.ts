@@ -17,6 +17,10 @@ import HandleRandomNature from "../modules/pokemon/handlers/randomNature.handler
 import HandleRandomIvs from "../modules/pokemon/handlers/randomIvs.handler.ts";
 import HandleGrowthRate from "../modules/pokemon/handlers/growthRate.handler.ts";
 import HandleCreateTrainer from "../modules/trainer/handlers/createTrainer.handler.ts";
+import HandleSprites from "../modules/pokemon/handlers/sprites.handler.ts";
+import HandleStats from "../modules/pokemon/handlers/stats.handler.ts";
+import HandleGetRoute from "../modules/routes/handlers/getRoute.handler.ts";
+import RoutesModule from "../modules/routes/routes.module.ts";
 
 export default class DiscordClient extends Client {
     public readonly modules: Collection<string, BaseModule> = new Collection();
@@ -47,6 +51,12 @@ export default class DiscordClient extends Client {
         this.handlers.set(HandleRandomIvs.name, new HandleRandomIvs());
         this.handlers.set(HandleRandomMoves.name, new HandleRandomMoves());
         this.handlers.set(HandleRandomNature.name, new HandleRandomNature());
+        this.handlers.set(HandleSprites.name, new HandleSprites());
+        this.handlers.set(HandleStats.name, new HandleStats());
+        //#endregion
+
+        //#region Route Handlers
+        this.handlers.set(HandleGetRoute.name, new HandleGetRoute());
         //#endregion
 
         //#region Trainer Handlers
@@ -81,6 +91,7 @@ export default class DiscordClient extends Client {
 
         this.modules.set('core', new CoreModule());
         this.modules.set('pokemon', new PokemonModule());
+        this.modules.set('routes', new RoutesModule());
         this.modules.set('trainer', new TrainerModule());
 
         this.handleEvents();

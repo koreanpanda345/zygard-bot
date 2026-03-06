@@ -1,13 +1,28 @@
 {
   "version": "5",
   "specifiers": {
+    "jsr:@std/assert@1": "1.0.19",
+    "jsr:@std/internal@^1.0.12": "1.0.12",
     "npm:@fastify/multipart@^9.4.0": "9.4.0",
     "npm:@pkmn/dex@~0.10.7": "0.10.7",
+    "npm:axios@^1.13.6": "1.13.6",
     "npm:discord.js@^14.25.1": "14.25.1",
     "npm:fastify@^5.7.4": "5.7.4",
     "npm:mongodb@^7.1.0": "7.1.0",
     "npm:mongoose@^9.2.4": "9.2.4",
-    "npm:pokenode-ts@^1.20.0": "1.20.0_axios@1.13.6_axios-cache-interceptor@1.11.4__axios@1.13.6"
+    "npm:pokenode-ts@^1.20.0": "1.20.0_axios@1.13.6_axios-cache-interceptor@1.11.4__axios@1.13.6",
+    "npm:string-progressbar@^1.0.4": "1.0.4"
+  },
+  "jsr": {
+    "@std/assert@1.0.19": {
+      "integrity": "eaada96ee120cb980bc47e040f82814d786fe8162ecc53c91d8df60b8755991e",
+      "dependencies": [
+        "jsr:@std/internal"
+      ]
+    },
+    "@std/internal@1.0.12": {
+      "integrity": "972a634fd5bc34b242024402972cd5143eac68d8dffaca5eaa4dba30ce17b027"
+    }
   },
   "npm": {
     "@discordjs/builders@1.13.1": {
@@ -630,6 +645,9 @@
     "split2@4.2.0": {
       "integrity": "sha512-UcjcJOWknrNkF6PLX83qcHM6KHgVKNkV62Y8a5uYDVv9ydGQVwAHMKqHdJje1VTWpljG0WYpCDhrCdAOYH4TWg=="
     },
+    "string-progressbar@1.0.4": {
+      "integrity": "sha512-OpkcFxlFjn7kz5jTWmPGY+FFJVN21lQ9k0fkK0XS5GVvlCgS1stgDNEoMyqnkbZEcVP3Gv6IxqgG7tnD7ChBSw=="
+    },
     "thread-stream@4.0.0": {
       "integrity": "sha512-4iMVL6HAINXWf1ZKZjIPcz5wYaOdPhtO8ATvZ+Xqp3BTdaqtAwQkNmKORqcIo5YkQqGXq5cwfswDwMqqQNrpJA==",
       "dependencies": [
@@ -679,11 +697,13 @@
       "jsr:@std/assert@1",
       "npm:@fastify/multipart@^9.4.0",
       "npm:@pkmn/dex@~0.10.7",
+      "npm:axios@^1.13.6",
       "npm:discord.js@^14.25.1",
       "npm:fastify@^5.7.4",
       "npm:mongodb@^7.1.0",
       "npm:mongoose@^9.2.4",
-      "npm:pokenode-ts@^1.20.0"
+      "npm:pokenode-ts@^1.20.0",
+      "npm:string-progressbar@^1.0.4"
     ]
   }
 }

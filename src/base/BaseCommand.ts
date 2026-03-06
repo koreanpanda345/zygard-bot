@@ -1,4 +1,4 @@
-import { CommandInteraction, SlashCommandBuilder } from "discord.js";
+import { ChatInputCommandInteraction, SlashCommandBuilder } from "discord.js";
 
 export default abstract class BaseCommand {
     data: SlashCommandBuilder;
@@ -16,7 +16,7 @@ export default abstract class BaseCommand {
     }
 
     // deno-lint-ignore no-explicit-any
-    public invoke(interaction: CommandInteraction): any | Promise<any> {
+    public invoke(interaction: ChatInputCommandInteraction): any | Promise<any> {
         throw "not yet implemented";
     }
 }

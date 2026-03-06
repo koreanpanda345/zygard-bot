@@ -1,4 +1,4 @@
-import { CommandInteraction, EmbedBuilder, Message, TextChannel } from "discord.js";
+import { ChatInputCommandInteraction, EmbedBuilder, Message, TextChannel } from "discord.js";
 import BaseHandler from "../../../base/BaseHandler.ts";
 
 export default class HandleError extends BaseHandler {
@@ -6,7 +6,7 @@ export default class HandleError extends BaseHandler {
         super(HandleError.name);
     }
 
-    override async handle(ctx: Message | CommandInteraction, error: any) {
+    override async handle(ctx: Message | ChatInputCommandInteraction, error: any) {
         const embed = new EmbedBuilder();
 
         embed.setTitle("An error occurred while handling a command.");
@@ -15,6 +15,8 @@ export default class HandleError extends BaseHandler {
         
         if (ctx instanceof Message) {
             await (ctx.channel as TextChannel).send({ embeds: [embed] });
+        } else if (ctx instanceof ChatInputCommandInteraction && (ctx.deferred || ctx.replied)) {
+            await ctx.editReply({ embeds: [embed] });
         } else {
             await ctx.reply({ embeds: [embed] });
         }

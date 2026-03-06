@@ -1,4 +1,4 @@
-import { CommandInteraction } from "discord.js";
+import { ChatInputCommandInteraction } from "discord.js";
 import BaseCommand from "../../../base/BaseCommand.ts";
 import BaseGuard from "../../../base/BaseGuard.ts";
 import Database from "../../../core/Database.ts";
@@ -7,7 +7,7 @@ export default class HasTrainerGuard extends BaseGuard {
         super(HasTrainerGuard.name);
     }
 
-    public override async canExecute(discordUserId: string, interaction: CommandInteraction, command: BaseCommand) {
+    public override async canExecute(discordUserId: string, interaction: ChatInputCommandInteraction, command: BaseCommand) {
         const trainer = await Database.TrainerCollection.findOne({ discordUserId });
         if (command.flags?.hasTrainer === 0 && !trainer) return true;
         else if (command.flags?.hasTrainer === 1 && trainer) return true;
